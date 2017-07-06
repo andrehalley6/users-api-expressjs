@@ -1,4 +1,3 @@
-var User = require('../models/users');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
 
@@ -13,7 +12,7 @@ exports.postUser = function(req, res) {
 
 	// var storage = multer.diskStorage({
 	// 	destination: function(req, file, cb) {
-	// 		cb(null, __dirname + '/images');
+	// 		cb(null, __dirname + '/../images');
 	// 	}, 
 	// 	filename: function(req, file, cb) {
 	// 		var ext = file.originalname.split('.');
@@ -23,10 +22,10 @@ exports.postUser = function(req, res) {
 	// });
 
 	// var upload = multer({
-	// 	storage: storage
-	// }).single('upload');
+	// 	storage: storage, 
+	// }).single('photo');
 
-	// upload(function(req, res, err) {
+	// upload(req, res, function(err) {
 	// 	if(err) {
 	// 		res.json({
 	// 			status: 'ERROR', 
@@ -40,7 +39,8 @@ exports.postUser = function(req, res) {
 			email: email, 
 			password: password, 
 			fullname: fullname, 
-			birth_date: new Date(birth_date)
+			birth_date: new Date(birth_date), 
+			// photo: '/var/www/html/users-api-expressjs/images/'
 		};
 
 		// Check if email exist
@@ -60,11 +60,12 @@ exports.postUser = function(req, res) {
 							message: err
 						});
 					}
-
-					return res.json({
-						status: 'OK', 
-						message: 'User successfully registered'
-					});
+					else {
+						return res.json({
+							status: 'OK', 
+							message: 'User successfully registered'
+						});
+					}
 				});
 			}
 			else {

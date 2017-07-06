@@ -23,8 +23,8 @@ app.use(
 );
 
 // Use the body-parser package in our application
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true, limit: '2mb' }));
+app.use(bodyParser.json({ limit: '2mb' }));
 
 // Use the passport package in our application
 app.use(passport.initialize());
